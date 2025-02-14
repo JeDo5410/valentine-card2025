@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Card for Nadia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f472b6, #ec4899);
+            font-family: Poppins, sans-serif;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            min-height: 450px;
+            margin: 15px;
+            transform-style: preserve-3d;
+            transition: transform 0.8s;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px 15px;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .heart-container {
+            font-size: 48px;
+            color: #ec4899;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin: 15px 0;
+        }
+
+        .heart-container:hover {
+            transform: scale(1.1);
+        }
+
+        .heart-container.clicked {
+            animation: heartBeat 1s;
+        }
+
+        @keyframes heartBeat {
+            0% {
+                transform: scale(1);
+            }
+
+            14% {
+                transform: scale(1.3);
+            }
+
+            28% {
+                transform: scale(1);
+            }
+
+            42% {
+                transform: scale(1.3);
+            }
+
+            70% {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #ec4899;
+            margin-bottom: 15px;
+            font-size: 20px;
+            line-height: 1.3;
+        }
+
+        .personal-message {
+            color: #374151;
+            font-size: 12px;
+            line-height: 1.5;
+            margin: 15px 0;
+            padding: 0 8px;
+            text-align: justify;
+        }
+
+        .personal-message br:first-of-type {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .personal-message br:last-of-type {
+            display: block;
+            margin-top: 8px;
+        }
+
+        /* Add these classes to the respective text elements */
+        .greeting {
+            text-align: right;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .signature {
+            text-align: right;
+            width: 100%;
+        }
+
+        .message-container {
+            height: 60px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message {
+            position: absolute;
+            width: 100%;
+            transition: opacity 0.5s;
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.4;
+            opacity: 0;
+        }
+
+        .message.active {
+            opacity: 1;
+        }
+
+        .back-message {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #374151;
+            margin: 15px 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        button {
+            background: #ec4899;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #db2777;
+            transform: translateY(-2px);
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                margin: 8px;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            .message {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-face card-front">
+            <div class="heart-container">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>Happy Valentine's Day<br>Wifey Nadia! 💝</h1>
+            <div class="personal-message">
+                <span class="greeting">My dearest Nadia,</span><br>
+                Though miles separate us this Valentine's Day, my heart grows fonder with each passing moment. Until we
+                can hold each other again, let this little gift remind you of my endless love and devotion. You are my
+                everything, and I cherish every moment we share, even from afar. Soon we'll create more beautiful
+                memories together, but until then, know that my love for you spans any distance between us.<br>
+                <span class="signature">With all my heart,<br>
+                Your loving husband, Edward</span>
+            </div>
+            <div class="message-container hidden">
+                <p class="message active">You make my heart skip a beat 💓</p>
+                <p class="message">Every moment with you is magical ✨</p>
+                <p class="message">You're my favorite person in the world 🌍</p>
+                <p class="message">You make me smile every single day 😊</p>
+                <p class="message">I'm blessed to have you as my wife 💝</p>
+            </div>
+            <div class="controls hidden">
+                <button class="play-button">
+                    <i class="fas fa-play"></i>
+                </button>
+            </div>
+            <button class="flip-button">
+                <i class="fas fa-gift"></i>
+                Special Surprise
+            </button>
+        </div>
+        <div class="card-face card-back">
+            <div class="card-content">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h1>My Love For You Is...</h1>
+                <div class="back-message">
+                    Deeper than the ocean 🌊<br>
+                    Higher than the stars ⭐<br>
+                    Warmer than the sun ☀️<br>
+                    And grows stronger every day 💝
+                </div>
+            </div>
+            <button class="flip-button">
+                Back to Front
+            </button>
+        </div>
+    </div>
+    <script>
+        const card = document.querySelector('.card');
+        const heartContainer = document.querySelector('.heart-container');
+        const messageContainer = document.querySelector('.message-container');
+        const messages = document.querySelectorAll('.message-container .message');
+        const controls = document.querySelector('.controls');
+        const playButton = document.querySelector('.play-button');
+        const flipButtons = document.querySelectorAll('.flip-button');
+
+        let heartClicks = 0;
+        let currentMessage = 0;
+        let isPlaying = false;
+        let messageInterval;
+
+        heartContainer.addEventListener('click', () => {
+            heartContainer.classList.add('clicked');
+            setTimeout(() => heartContainer.classList.remove('clicked'), 1000);
+            heartClicks++;
+            if (heartClicks === 3) {
+                messageContainer.classList.remove('hidden');
+                controls.classList.remove('hidden');
+            }
+        });
+
+        playButton.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            playButton.innerHTML = isPlaying ?
+                '<i class="fas fa-pause"></i>' :
+                '<i class="fas fa-play"></i>';
+            if (isPlaying) {
+                messageInterval = setInterval(showNextMessage, 3000);
+            } else {
+                clearInterval(messageInterval);
+            }
+        });
+
+        function showNextMessage() {
+            messages[currentMessage].classList.remove('active');
+            currentMessage = (currentMessage + 1) % messages.length;
+            messages[currentMessage].classList.add('active');
+        }
+
+        flipButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+    </script>
+</body>
+
+</html>
