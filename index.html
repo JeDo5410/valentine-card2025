@@ -23,19 +23,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f472b6, #ec4899);
+            background: linear-gradient(135deg, #f472b6, #db2777);
             font-family: Poppins, sans-serif;
             perspective: 1000px;
+            padding: 20px;
         }
 
         .card {
             position: relative;
             width: 100%;
-            max-width: 300px;
-            min-height: 450px;
-            margin: 15px;
+            max-width: 340px;
+            height: auto;
+            min-height: 550px;
+            margin: 0 auto;
             transform-style: preserve-3d;
-            transition: transform 0.8s;
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            border-radius: 16px;
         }
 
         .card.flipped {
@@ -46,24 +50,29 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            min-height: 550px;
             backface-visibility: hidden;
             background: white;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
+            overflow: auto;
+        }
+
+        .card-front {
+            background: linear-gradient(to bottom, #fff 0%, #fff8f8 100%);
         }
 
         .card-back {
             transform: rotateY(180deg);
-            background: white;
+            background: linear-gradient(to bottom, #fff8f8 0%, #fce7f3 100%);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 30px 15px;
+            padding: 30px 20px;
         }
 
         .card-content {
@@ -72,100 +81,145 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
         }
 
         .heart-container {
-            font-size: 48px;
+            font-size: 56px;
             color: #ec4899;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, filter 0.3s;
             margin: 15px 0;
+            position: relative;
         }
 
         .heart-container:hover {
             transform: scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.6));
         }
 
         .heart-container.clicked {
             animation: heartBeat 1s;
         }
 
+        .heart-hint {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(236, 72, 153, 0.1);
+            color: #ec4899;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            opacity: 0.8;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .heart-progress {
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .heart-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #fdd1e6;
+            transition: background-color 0.3s;
+        }
+
+        .heart-dot.active {
+            background-color: #ec4899;
+        }
+
         @keyframes heartBeat {
             0% {
                 transform: scale(1);
             }
-
             14% {
                 transform: scale(1.3);
             }
-
             28% {
                 transform: scale(1);
             }
-
             42% {
                 transform: scale(1.3);
             }
-
             70% {
                 transform: scale(1);
             }
         }
 
         h1 {
-            color: #ec4899;
+            color: #db2777;
             margin-bottom: 15px;
-            font-size: 20px;
+            font-size: 22px;
             line-height: 1.3;
+            font-weight: 600;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
 
         .personal-message {
-            color: #374151;
-            font-size: 12px;
-            line-height: 1.5;
-            margin: 15px 0;
-            padding: 0 8px;
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 10px 0 20px 0;
             text-align: justify;
+            background-color: rgba(252, 231, 243, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(236, 72, 153, 0.1);
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            max-height: 240px;
+            overflow-y: auto;
         }
 
-        .personal-message br:first-of-type {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .personal-message br:last-of-type {
-            display: block;
-            margin-top: 8px;
-        }
-
-        /* Add these classes to the respective text elements */
         .greeting {
             text-align: right;
             width: 100%;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            font-style: italic;
+            color: #db2777;
         }
 
         .signature {
             text-align: right;
             width: 100%;
+            margin-top: 12px;
+            font-style: italic;
+            color: #db2777;
         }
 
         .message-container {
             height: 60px;
-            margin: 15px 0;
+            margin: 20px 0;
             position: relative;
             overflow: hidden;
+            background-color: rgba(252, 231, 243, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(236, 72, 153, 0.1);
+            width: 100%;
         }
 
         .message {
             position: absolute;
             width: 100%;
-            transition: opacity 0.5s;
-            color: #374151;
-            font-size: 14px;
+            transition: opacity 0.8s;
+            color: #4b5563;
+            font-size: 15px;
             line-height: 1.4;
             opacity: 0;
+            font-weight: 500;
+            left: 0;
+            text-align: center;
         }
 
         .message.active {
@@ -175,8 +229,12 @@
         .back-message {
             font-size: 16px;
             line-height: 1.8;
-            color: #374151;
+            color: #4b5563;
             margin: 15px 0;
+            background-color: rgba(252, 231, 243, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(236, 72, 153, 0.1);
         }
 
         .controls {
@@ -198,34 +256,118 @@
             align-items: center;
             gap: 6px;
             margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(236, 72, 153, 0.25);
         }
 
         button:hover {
             background: #db2777;
             transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(236, 72, 153, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(236, 72, 153, 0.2);
         }
 
         .stars {
             color: #fbbf24;
-            font-size: 36px;
+            font-size: 40px;
             margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.5));
         }
 
         .hidden {
             display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .emoji {
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+            overflow: hidden;
+            display: none;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f472b6;
+            opacity: 0;
         }
 
         @media (max-width: 480px) {
             .card {
-                margin: 8px;
+                max-width: 320px;
+                min-height: 580px;
+            }
+
+            .card-face {
+                padding: 20px 15px;
+                min-height: 580px;
             }
 
             h1 {
-                font-size: 18px;
+                font-size: 20px;
+                margin-top: 0;
+            }
+
+            .personal-message {
+                font-size: 12px;
+                padding: 12px;
+                margin-bottom: 20px;
             }
 
             .message {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 8px 16px;
                 font-size: 13px;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+
+            .heart-container {
+                font-size: 42px;
+                margin: 10px 0;
             }
         }
     </style>
@@ -236,27 +378,33 @@
         <div class="card-face card-front">
             <div class="heart-container">
                 <i class="fas fa-heart"></i>
+                <div class="heart-hint hidden">Click me!</div>
+                <div class="heart-progress">
+                    <div class="heart-dot"></div>
+                    <div class="heart-dot"></div>
+                    <div class="heart-dot"></div>
+                </div>
             </div>
             <h1>Happy Valentine's Day<br>Wifey Nadia! 💝</h1>
             <div class="personal-message">
-                <span class="greeting">My dearest Nadia,</span><br>
+                <span class="greeting">My dearest Nadia,</span>
                 Though miles separate us this Valentine's Day, my heart grows fonder with each passing moment. Until we
                 can hold each other again, let this little gift remind you of my endless love and devotion. You are my
                 everything, and I cherish every moment we share, even from afar. Soon we'll create more beautiful
-                memories together, but until then, know that my love for you spans any distance between us.<br>
+                memories together, but until then, know that my love for you spans any distance between us.
                 <span class="signature">With all my heart,<br>
                 Your loving husband, Edward</span>
             </div>
             <div class="message-container hidden">
-                <p class="message active">You make my heart skip a beat 💓</p>
-                <p class="message">Every moment with you is magical ✨</p>
-                <p class="message">You're my favorite person in the world 🌍</p>
-                <p class="message">You make me smile every single day 😊</p>
-                <p class="message">I'm blessed to have you as my wife 💝</p>
+                <p class="message active">You make my heart skip a beat <span class="emoji">💓</span></p>
+                <p class="message">Every moment with you is magical <span class="emoji">✨</span></p>
+                <p class="message">You're my favorite person in the world <span class="emoji">🌍</span></p>
+                <p class="message">You make me smile every single day <span class="emoji">😊</span></p>
+                <p class="message">I'm blessed to have you as my wife <span class="emoji">💝</span></p>
             </div>
             <div class="controls hidden">
                 <button class="play-button">
-                    <i class="fas fa-play"></i>
+                    <i class="fas fa-play"></i> Play Messages
                 </button>
             </div>
             <button class="flip-button">
@@ -271,46 +419,74 @@
                 </div>
                 <h1>My Love For You Is...</h1>
                 <div class="back-message">
-                    Deeper than the ocean 🌊<br>
-                    Higher than the stars ⭐<br>
-                    Warmer than the sun ☀️<br>
-                    And grows stronger every day 💝
+                    Deeper than the ocean <span class="emoji">🌊</span><br>
+                    Higher than the stars <span class="emoji">⭐</span><br>
+                    Warmer than the sun <span class="emoji">☀️</span><br>
+                    And grows stronger every day <span class="emoji">💝</span>
                 </div>
             </div>
             <button class="flip-button">
+                <i class="fas fa-arrow-left"></i>
                 Back to Front
             </button>
         </div>
     </div>
+
+    <div class="confetti-container" id="confetti-container"></div>
+
     <script>
         const card = document.querySelector('.card');
         const heartContainer = document.querySelector('.heart-container');
+        const heartHint = document.querySelector('.heart-hint');
+        const heartDots = document.querySelectorAll('.heart-dot');
         const messageContainer = document.querySelector('.message-container');
         const messages = document.querySelectorAll('.message-container .message');
         const controls = document.querySelector('.controls');
         const playButton = document.querySelector('.play-button');
         const flipButtons = document.querySelectorAll('.flip-button');
+        const confettiContainer = document.querySelector('.confetti-container');
 
         let heartClicks = 0;
         let currentMessage = 0;
         let isPlaying = false;
         let messageInterval;
 
+        // Show heart hint after 2 seconds
+        setTimeout(() => {
+            heartHint.classList.remove('hidden');
+            setTimeout(() => {
+                heartHint.classList.add('hidden');
+            }, 3000);
+        }, 2000);
+
         heartContainer.addEventListener('click', () => {
             heartContainer.classList.add('clicked');
             setTimeout(() => heartContainer.classList.remove('clicked'), 1000);
             heartClicks++;
+            
+            // Update heart dots
+            if (heartClicks <= 3) {
+                heartDots[heartClicks - 1].classList.add('active');
+            }
+            
             if (heartClicks === 3) {
                 messageContainer.classList.remove('hidden');
                 controls.classList.remove('hidden');
+                
+                // Add fade-in animation
+                messageContainer.classList.add('fade-in');
+                controls.classList.add('fade-in');
+                
+                // Show confetti
+                createConfetti();
             }
         });
 
         playButton.addEventListener('click', () => {
             isPlaying = !isPlaying;
             playButton.innerHTML = isPlaying ?
-                '<i class="fas fa-pause"></i>' :
-                '<i class="fas fa-play"></i>';
+                '<i class="fas fa-pause"></i> Pause' :
+                '<i class="fas fa-play"></i> Play Messages';
             if (isPlaying) {
                 messageInterval = setInterval(showNextMessage, 3000);
             } else {
@@ -327,8 +503,79 @@
         flipButtons.forEach(button => {
             button.addEventListener('click', () => {
                 card.classList.toggle('flipped');
+                
+                // If flipping to back, show confetti
+                if (!card.classList.contains('flipped')) {
+                    setTimeout(() => {
+                        createConfetti();
+                    }, 500);
+                }
             });
         });
+
+        // Hover effect for heart
+        heartContainer.addEventListener('mouseenter', () => {
+            if (heartClicks < 3) {
+                heartHint.classList.remove('hidden');
+            }
+        });
+
+        heartContainer.addEventListener('mouseleave', () => {
+            heartHint.classList.add('hidden');
+        });
+
+        // Create confetti effect
+        function createConfetti() {
+            confettiContainer.style.display = 'block';
+            confettiContainer.innerHTML = '';
+            
+            const colors = ['#ec4899', '#f472b6', '#fda4af', '#fbbf24', '#ffffff'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                
+                // Random properties
+                const size = Math.random() * 8 + 6;
+                const shape = Math.random() > 0.5 ? '50%' : '0';
+                const left = Math.random() * 100;
+                const rotate = Math.random() * 360;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Apply styles
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                confetti.style.borderRadius = shape;
+                confetti.style.left = `${left}vw`;
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = color;
+                confetti.style.transform = `rotate(${rotate}deg)`;
+                
+                // Append to container
+                confettiContainer.appendChild(confetti);
+                
+                // Animate
+                const duration = Math.random() * 3 + 2;
+                const delay = Math.random() * 2;
+                
+                confetti.animate(
+                    [
+                        { top: '-10px', opacity: 1 },
+                        { top: '100vh', opacity: 0 }
+                    ],
+                    {
+                        duration: duration * 1000,
+                        delay: delay * 1000,
+                        easing: 'cubic-bezier(0.1, 0.8, 0.8, 1)'
+                    }
+                );
+            }
+            
+            // Clean up confetti after animation
+            setTimeout(() => {
+                confettiContainer.style.display = 'none';
+            }, 6000);
+        }
     </script>
 </body>
 
